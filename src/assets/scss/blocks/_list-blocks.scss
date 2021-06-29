@@ -1,0 +1,73 @@
+/*------------------------------------*\
+  > List Blocks & Block
+  A list of "blocks" used for various purpose
+  e.g. Planing Period
+\*------------------------------------*/
+
+.list-blocks {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-right: -$size-20;
+}
+
+.list-blocks__item {
+    margin-bottom: $size-30;
+    margin-right: $size-28;
+
+    @include media-query("medium") {
+        margin-right: $size-20;
+    }
+}
+
+// Block
+// ---------------------
+.block {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    min-width: $size-90;
+    min-height: $size-90;
+    border: 1px solid $grey-90;
+    border-radius: $size-10;
+    background: #fff;
+}
+
+.block__header,
+.block__content {
+    width: 100%;
+}
+
+.block__header {
+    position: absolute;
+    top: 0;
+    display: flex;
+    padding: $size-5 $size-5 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.block__content {
+    text-align: center;
+    padding-bottom: $size-5;
+}
+
+.block__title {
+    margin: 0;
+    font-weight: $font-weight-regular;
+    font-size: $size-16;
+    line-height: 1;
+}
+
+.block__title-value {
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: $font-weight-bold;
+    font-size: $size-30;
+}

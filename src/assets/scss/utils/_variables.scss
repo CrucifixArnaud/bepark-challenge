@@ -7,8 +7,8 @@
 
 
 // fonts
-$font-title: "Sans serif";
-$font-body: "Sans serif";
+$font-title: "Dosis", sans-serif;
+$font-body: "Roboto", sans-serif;
 $font-button: "Sans serif";
 
 // sizes
@@ -53,6 +53,7 @@ $color-primary: cyan;
 // Various
 
 // Grey shader
+$grey-90: hsl(0, 0%, 90%);
 $grey-7: hsl(0, 0%, 7%);
 
 // Functional

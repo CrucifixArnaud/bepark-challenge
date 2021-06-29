@@ -31,6 +31,8 @@ $public-path: "/";// Path prefix to public folder where all the "image" are save
 // Reusable stand alone blocks which can break-before:  use everywhere on the project
 // ex: Card, Button, Searchbox
 
+@import "blocks/buttons";
+@import "blocks/list-blocks";
 
 //====== Pages ======
 // Specifics rules for each pages

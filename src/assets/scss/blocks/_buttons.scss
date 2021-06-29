@@ -1,0 +1,10 @@
+/*------------------------------------*\
+  > Button
+  All style for generic buttons
+\*------------------------------------*/
+
+// Button Transparent
+%button--transparent,
+.button--transparent {
+    @include button-transparent();
+}

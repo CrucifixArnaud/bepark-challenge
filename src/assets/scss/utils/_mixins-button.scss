@@ -2,3 +2,25 @@
     > Button Mixin
 \*------------------------------------*/
 
+// Button Transparent
+// Button without any "style"
+// e.g. Card Bookmark classified button
+@mixin button-transparent($outline: "default") {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+
+    @if $outline != "default" {
+        &:focus {
+            outline: $outline;
+        }
+    }
+
+    &:disabled,
+    &[disabled="disabled"],
+    &[aria-disabled="true"],
+    &.button-disabled {
+        cursor: not-allowed;
+    }
+}
