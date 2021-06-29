@@ -24,6 +24,8 @@ $public-path: "/";// Path prefix to public folder where all the "image" are save
 // ex: Layout, Main header, Main footer
 // @import "./layout/layout";
 @import "layout/layout";
+@import "layout/app-header";
+@import "layout/app-content";
 
 //====== Blocks ======
 // Reusable stand alone blocks which can break-before:  use everywhere on the project

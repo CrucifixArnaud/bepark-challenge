@@ -1,0 +1,17 @@
+/*------------------------------------*\
+  > App Header
+  Main header of the app
+\*------------------------------------*/
+
+.app-header {
+    display: 100%;
+    width: 100%;
+    background: $color-header-background;
+    padding: $size-22 $size-16;
+
+    @include media-query("medium") {
+        display: inline-block;
+        width: auto;
+        height: 100%;
+    }
+}

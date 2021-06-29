@@ -32,6 +32,21 @@ $font-weight-button: $font-weight-regular !default;
 // Colors
 // ---------------------
 
+// Colors
+// ---------------------
+
+// Generics Colors
+// ---------------------
+// Colors name are based on https://chir.ag/projects/name-that-color/
+
+$grey-limed-spruce: #384551;
+
+
+// Contextual Color
+// ---------------------
+
+// Contextual
+
 $color-primary: #ff0066;
 $color-primary: cyan;
 
@@ -47,7 +62,9 @@ $functional-warning: gold !default;
 
 // Layout
 $color-background: #fff;
-$color-body: #000;
+$color-body: $grey-limed-spruce;
+
+$color-header-background: $color-body;
 
 // Form & buttons
 // ---------------------

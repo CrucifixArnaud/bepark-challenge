@@ -1,0 +1,12 @@
+/*------------------------------------*\
+  > App Content
+  Main Content of the app
+\*------------------------------------*/
+
+.app-content {
+    padding: $size-30 $size-20;
+
+    @include media-query("medium") {
+        padding: $size-30;
+    }
+}

@@ -1,22 +1,14 @@
-import logo from 'assets/images/logos/logo.svg';
+import logo from 'assets/images/logos/bepark-logo.svg';
 
 function App() {
   return (
     <div className="app">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-            Learn React
-        </a>
-      </header>
+        <header className="app-header">
+            <img src={logo} className="app-header__logo" alt="BePark" />
+        </header>
+        <main className="app-content">
+            <h1>Planning Period</h1>
+        </main>
     </div>
   );
 }
