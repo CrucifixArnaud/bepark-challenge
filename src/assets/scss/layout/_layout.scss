@@ -1,0 +1,17 @@
+/*------------------------------------*\
+  > Layout.scss
+  Define all general rules for layout component (container, etc)
+\*------------------------------------*/
+
+html {
+    height: 100%;
+
+    /* Better font rendering (Mainly for Mac Os X) */
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+body {
+    height: 100%;
+}

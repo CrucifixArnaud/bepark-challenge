@@ -1,0 +1,17 @@
+//====== Typography ======
+// Import fontface and define various typography generic rules
+
+// Global Typography
+// ---------------------
+html {
+
+    /* Better font rendering (Mainly for Mac Os X) */
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+html,
+body {
+    color: $color-body;
+}

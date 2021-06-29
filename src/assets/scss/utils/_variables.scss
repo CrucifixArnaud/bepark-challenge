@@ -1,0 +1,90 @@
+/*------------------------------------*\
+  > Variables
+    Define all shared variables of the app
+    See /themes/<theme-name>.scss for theme specific variables
+\*------------------------------------*/
+
+
+
+// fonts
+$font-title: "Sans serif";
+$font-body: "Sans serif";
+$font-button: "Sans serif";
+
+// sizes
+$base-size: 100% !default;
+
+$font-size-body: 1rem !default;
+$line-height-body: 1.5 !default;
+
+// weights
+
+$font-weight-light: 200 !default;
+$font-weight-regular: 400 !default;
+$font-weight-medium: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-ultra: 900 !default;
+
+$font-weight-title: $font-weight-regular !default;
+$font-weight-body: $font-weight-regular !default;
+$font-weight-button: $font-weight-regular !default;
+
+// Colors
+// ---------------------
+
+$color-primary: #ff0066;
+$color-primary: cyan;
+
+// Various
+
+// Grey shader
+$grey-7: hsl(0, 0%, 7%);
+
+// Functional
+$functional-success: chartreuse !default;
+$functional-error: red !default;
+$functional-warning: gold !default;
+
+// Layout
+$color-background: #fff;
+$color-body: #000;
+
+// Form & buttons
+// ---------------------
+
+// Responsive
+// ---------------------
+/**
+ * Breakpoints.
+ * The first value is the name of the breakpoint (use for grid class generation)
+ * The second value is the media query that the breakpoint fires at.
+ *
+ * @warning: xl breakpoint should only be used for gallery modal
+ */
+$breakpoints: (
+    "x-small" "(max-width: 35.93rem)", // 575px
+    "small" "(min-width: 36rem)", // 576px
+    "medium" "(min-width: 48rem)", // 768px
+    "desktop" "(min-width: 62rem)", // 992px
+    "widescreen" "(min-width: 75rem)", // 1200px
+    "xl" "(min-width: 87.5rem)", // 1400px
+    "below-medium" "(max-width: 47.9375rem)", // 768px
+    "below-desktop" "(max-width: 61.9375rem)" // 991px
+) !default;
+
+$max-width-x-small: 15.125rem !default; // 242
+$max-width-small: 33.75rem !default; // 540
+$max-width-medium: 45rem !default; // 720
+$max-width-desktop: 58.75rem !default; // 940
+$max-width-widescreen: 58.75rem !default; // 940
+
+// Transition
+// ---------------------
+$ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1) !default;
+
+// Use by z (_functions.scss) to declare z-index
+// Z Layer
+// ---------------------
+$z-layers: (
+    "modal": 2000,
+) !default;
