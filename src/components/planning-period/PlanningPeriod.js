@@ -107,6 +107,11 @@ class PlanningPeriod extends React.Component {
         if (periodIndex > -1) {
             planningPeriods[periodIndex].value = value;
 
+            // Sort periods in an ascending order
+            planningPeriods.sort((a, b) => {
+                return a.value - b.value;
+            });
+
             this.setState(prevState => ({
                 planningPeriods: planningPeriods
             }));
