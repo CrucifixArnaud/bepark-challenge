@@ -3,6 +3,9 @@
   All style for generic buttons
 \*------------------------------------*/
 
+// Button Types
+// ---------------------
+
 // Button Transparent
 %button--transparent,
 .button--transparent {
@@ -13,4 +16,10 @@
 %button--icon,
 .button--icon {
     @include button-icon();
+}
+
+// Button Icons
+// ---------------------
+.button__icon {
+    display: block;
 }

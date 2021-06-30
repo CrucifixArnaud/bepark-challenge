@@ -31,7 +31,6 @@
     @include button-transparent();
 
     .button__icon {
-        display: block;
         fill: #fff;
         stroke: $grey-90;
     }
