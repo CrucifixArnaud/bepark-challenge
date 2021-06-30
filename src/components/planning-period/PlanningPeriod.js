@@ -1,5 +1,6 @@
 import React from 'react';
 import { CSSTransition } from "react-transition-group";
+import { v4 as uuidv4 } from 'uuid';
 
 import { getObjetIndexByKey } from "utils/helpers/array.js";
 
@@ -9,21 +10,27 @@ class PlanningPeriod extends React.Component {
 
         this.state = {
             planningPeriods: [{
+                    "id": `period-${uuidv4()}`,
                     "value": 1,
                     "favorite": false
                 }, {
+                    "id": `period-${uuidv4()}`,
                     "value": 5,
                     "favorite": false
                 }, {
+                    "id": `period-${uuidv4()}`,
                     "value": 7,
                     "favorite": false
                 }, {
+                    "id": `period-${uuidv4()}`,
                     "value": 15,
                     "favorite": false
                 }, {
+                    "id": `period-${uuidv4()}`,
                     "value": 30,
                     "favorite": true
-                }]
+                }],
+            defaultPeriodValue: 1
         };
     };
 
@@ -46,7 +53,7 @@ class PlanningPeriod extends React.Component {
         }
     }
 
-    // Set all period to un favorite
+    // Set all period to non favorite
     resetFavoritePeriods() {
         let planningPeriods = this.state.planningPeriods.slice();
 
@@ -67,6 +74,38 @@ class PlanningPeriod extends React.Component {
 
         if (periodIndex > -1) {
             planningPeriods.splice(periodIndex, 1);
+
+            this.setState(prevState => ({
+                planningPeriods: planningPeriods
+            }));
+        }
+    }
+
+    // Add a period
+    handleAddPeriodClick() {
+        let planningPeriods = this.state.planningPeriods.slice();
+
+        planningPeriods.push({
+            "id": `period-${uuidv4()}`,
+            "value": null,
+            "favorite": false
+        });
+
+        this.setState(prevState => ({
+            planningPeriods: planningPeriods
+        }));
+    }
+
+    // Save period input value
+    handlePeriodInputBlur(id, e) {
+        const value = (e.target.value) ? e.target.value : this.state.defaultPeriodValue;
+
+        let planningPeriods = this.state.planningPeriods.slice();
+
+        const periodIndex = getObjetIndexByKey(planningPeriods, "id", id);
+
+        if (periodIndex > -1) {
+            planningPeriods[periodIndex].value = value;
 
             this.setState(prevState => ({
                 planningPeriods: planningPeriods
@@ -109,19 +148,33 @@ class PlanningPeriod extends React.Component {
                                             </button>
                                         </CSSTransition>
                                     </div>
-
                                     <div className="block__content">
-                                        <p className="block__title">
-                                            <strong className="block__title-value">{ period.value }</strong>
-                                            day
-                                        </p>
+                                        {period.value &&
+                                            <p className="block__title">
+                                                <strong className="block__title-value">{ period.value }</strong>
+                                                day
+                                            </p>
+                                        }
+
+                                        {!period.value &&
+                                            <p className="block__title">
+                                                <input
+                                                    className="block__input field--text--transparent block__title-value"
+                                                    type="number"
+                                                    placeholder={this.state.defaultPeriodValue}
+                                                    onBlur={ (e) => this.handlePeriodInputBlur(period.id, e) } />
+                                                day
+                                            </p>
+                                        }
                                     </div>
 
                                 </div>
                             </li>
                         ))}
                         <li className="list-blocks__item">
-                            <button className="button--transparent">
+                            <button
+                                className="button--transparent"
+                                onClick={ (e) => this.handleAddPeriodClick(e) }>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="12" fill="#E7E7E7"/>
                                     <line x1="18" y1="12" x2="6" y2="12" stroke="#2EAD73" strokeWidth="2"/>

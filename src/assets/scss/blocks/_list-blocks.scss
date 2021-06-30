@@ -19,7 +19,7 @@
     margin-right: $size-28;
     justify-content: center;
     align-items: center;
-    min-width: $size-90;
+    width: $size-90;
 
     @include media-query("medium") {
         margin-right: $size-20;
@@ -91,7 +91,17 @@
     display: block;
     width: 100%;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-weight: $font-weight-bold;
     font-size: $size-30;
+}
+
+// Block Input
+// "Unstyled" input inside of a bloc
+// e.g. When adding a new period in planning-period
+.block__input {
+    width: calc(100% - #{$size-20});
+    text-align: center;
+    color: $color-body;
 }
