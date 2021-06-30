@@ -14,8 +14,12 @@
 }
 
 .list-blocks__item {
+    display: flex;
     margin-bottom: $size-30;
     margin-right: $size-28;
+    justify-content: center;
+    align-items: center;
+    min-width: $size-90;
 
     @include media-query("medium") {
         margin-right: $size-20;
@@ -34,6 +38,26 @@
     border: 1px solid $grey-90;
     border-radius: $size-10;
     background: #fff;
+
+    // For better performance use a pseudo element with box shadow and set transition on opacity (instead of box-shadow directly)
+    // Pseudo element use for shadow
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: 0px 0px $size-10 rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition: opacity .2s $ease-in-out;
+        border-radius: $size-10;
+        z-index: -1;
+    }
+}
+
+.block--selected::after {
+    opacity: 1;
 }
 
 .block__header,

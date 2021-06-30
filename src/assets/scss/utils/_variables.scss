@@ -39,6 +39,8 @@ $font-weight-button: $font-weight-regular !default;
 // ---------------------
 // Colors name are based on https://chir.ag/projects/name-that-color/
 
+$green-jungle: #2ead73;
+
 $grey-limed-spruce: #384551;
 
 
@@ -47,8 +49,8 @@ $grey-limed-spruce: #384551;
 
 // Contextual
 
-$color-primary: #ff0066;
-$color-primary: cyan;
+$color-primary: $green-jungle;
+$color-secondary: cyan;
 
 // Various
 
@@ -98,7 +100,7 @@ $max-width-widescreen: 58.75rem !default; // 940
 
 // Transition
 // ---------------------
-$ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1) !default;
+$ease-in-out: cubic-bezier(.17,.67,.83,.67) !default;
 
 // Use by z (_functions.scss) to declare z-index
 // Z Layer

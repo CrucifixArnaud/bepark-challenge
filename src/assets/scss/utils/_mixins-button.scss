@@ -4,7 +4,6 @@
 
 // Button Transparent
 // Button without any "style"
-// e.g. Card Bookmark classified button
 @mixin button-transparent($outline: "default") {
     background: transparent;
     border: 0;
@@ -22,5 +21,23 @@
     &[aria-disabled="true"],
     &.button-disabled {
         cursor: not-allowed;
+    }
+}
+
+// Button Icon
+// Button without any "style" but with an icon has label
+// e.g. Select planing period button (star)
+@mixin button-icon() {
+    @include button-transparent();
+
+    .button__icon {
+        display: block;
+        fill: #fff;
+        stroke: $grey-90;
+    }
+
+    &.button--selected .button__icon {
+        stroke: $color-primary;
+        fill: $color-primary;
     }
 }

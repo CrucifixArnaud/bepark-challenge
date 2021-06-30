@@ -8,3 +8,9 @@
 .button--transparent {
     @include button-transparent();
 }
+
+// Button Star
+%button--icon,
+.button--icon {
+    @include button-icon();
+}

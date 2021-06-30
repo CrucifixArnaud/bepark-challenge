@@ -1,13 +1,63 @@
 import React from 'react';
 
+import { getObjetIndexByKey } from "utils/helpers/array.js";
+
 class PlanningPeriod extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            planningPeriods: [1, 5, 7, 15, 30]
+            planningPeriods: [{
+                    "value": 1,
+                    "favorite": false
+                }, {
+                    "value": 5,
+                    "favorite": false
+                }, {
+                    "value": 7,
+                    "favorite": false
+                }, {
+                    "value": 15,
+                    "favorite": false
+                }, {
+                    "value": 30,
+                    "favorite": true
+                }]
         };
     };
+
+    // Select a period
+    handleFavoriteClick(value) {
+
+        let planningPeriods = this.state.planningPeriods.slice();
+
+        const periodIndex = getObjetIndexByKey(planningPeriods, "value", value);
+
+        if (periodIndex > -1) {
+
+            this.resetFavoritePeriods();
+
+            // Toggle the favorite boolean value
+            planningPeriods[periodIndex].favorite = !planningPeriods[periodIndex].favorite;
+
+            this.setState(prevState => ({
+                planningPeriods: planningPeriods
+            }));
+        }
+    }
+
+    // Set all period to un favorite
+    resetFavoritePeriods() {
+        let planningPeriods = this.state.planningPeriods.slice();
+
+        planningPeriods.map((period, index) => {
+            return period.favorite = false;
+        });
+
+        this.setState(prevState => ({
+            planningPeriods: planningPeriods
+        }));
+    }
 
     render() {
         return (
@@ -18,12 +68,14 @@ class PlanningPeriod extends React.Component {
                     <ol className="list-blocks">
                         {this.state.planningPeriods.map((period, index) => (
                             <li className="list-blocks__item" key={index}>
-                                <div className="block">
-
+                                <div className={`block ${period.favorite ? "block--selected" : ""}`}>
                                     <div className="block__header">
-                                        <button className="button--transparent">
-                                            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11 1L13.2451 7.90983H20.5106L14.6327 12.1803L16.8779 19.0902L11 14.8197L5.12215 19.0902L7.36729 12.1803L1.48944 7.90983H8.75486L11 1Z" fill="white" stroke="#E5E5E5" strokeLinejoin="round"/>
+                                        <button
+                                            className={`button--icon ${period.favorite ? "button--selected" : ""}`}
+                                            onClick={ (e) => this.handleFavoriteClick(period.value, e) }
+                                            title={ `Select this period (${period.value})` }>
+                                            <svg className="button__icon" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11 1L13.2451 7.90983H20.5106L14.6327 12.1803L16.8779 19.0902L11 14.8197L5.12215 19.0902L7.36729 12.1803L1.48944 7.90983H8.75486L11 1Z" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
                                         <button className="button--transparent">
@@ -35,15 +87,24 @@ class PlanningPeriod extends React.Component {
                                     </div>
 
                                     <div className="block__content">
-                                        <h3 className="block__title">
-                                            <strong className="block__title-value">{ period }</strong>
+                                        <p className="block__title">
+                                            <strong className="block__title-value">{ period.value }</strong>
                                             day
-                                        </h3>
+                                        </p>
                                     </div>
 
                                 </div>
                             </li>
                         ))}
+                        <li className="list-blocks__item">
+                            <button className="button--transparent">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="12" fill="#E7E7E7"/>
+                                    <line x1="18" y1="12" x2="6" y2="12" stroke="#2EAD73" strokeWidth="2"/>
+                                    <line x1="12" y1="6" x2="12" y2="18" stroke="#2EAD73" strokeWidth="2"/>
+                                </svg>
+                            </button>
+                        </li>
                     </ol>
                 </div>
             </div>
