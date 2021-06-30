@@ -29,7 +29,6 @@ class PlanningPeriod extends React.Component {
 
     // Select a period
     handleFavoriteClick(value) {
-
         let planningPeriods = this.state.planningPeriods.slice();
 
         const periodIndex = getObjetIndexByKey(planningPeriods, "value", value);
@@ -60,6 +59,21 @@ class PlanningPeriod extends React.Component {
         }));
     }
 
+    // Remove a period
+    handleRemovePeriodClick(value) {
+        let planningPeriods = this.state.planningPeriods.slice();
+
+        const periodIndex = getObjetIndexByKey(planningPeriods, "value", value);
+
+        if (periodIndex > -1) {
+            planningPeriods.splice(periodIndex, 1);
+
+            this.setState(prevState => ({
+                planningPeriods: planningPeriods
+            }));
+        }
+    }
+
     render() {
         return (
             <div className="planning-period">
@@ -85,7 +99,9 @@ class PlanningPeriod extends React.Component {
                                             timeout={200}
                                             classNames="fade"
                                             unmountOnExit>
-                                            <button className="button--transparent">
+                                            <button
+                                                className="button--transparent"
+                                                onClick={ (e) => this.handleRemovePeriodClick(period.value, e) }>
                                                 <svg className="button__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="7" cy="7" r="7" fill="#E7E7E7"/>
                                                     <line x1="3" y1="7" x2="11" y2="7" stroke="#CC1A1A" strokeWidth="2"/>
