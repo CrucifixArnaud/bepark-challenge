@@ -78,12 +78,14 @@ class PlanningPeriod extends React.Component {
                                             <path d="M11 1L13.2451 7.90983H20.5106L14.6327 12.1803L16.8779 19.0902L11 14.8197L5.12215 19.0902L7.36729 12.1803L1.48944 7.90983H8.75486L11 1Z" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
-                                        <button className="button--transparent">
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="7" cy="7" r="7" fill="#E7E7E7"/>
-                                                <line x1="3" y1="7" x2="11" y2="7" stroke="#CC1A1A" strokeWidth="2"/>
-                                            </svg>
-                                        </button>
+                                        {!period.favorite &&
+                                            <button className="button--transparent">
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="7" cy="7" r="7" fill="#E7E7E7"/>
+                                                    <line x1="3" y1="7" x2="11" y2="7" stroke="#CC1A1A" strokeWidth="2"/>
+                                                </svg>
+                                            </button>
+                                        }
                                     </div>
 
                                     <div className="block__content">
