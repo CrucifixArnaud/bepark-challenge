@@ -1,6 +1,7 @@
 import logo from 'assets/images/logos/bepark-logo.svg';
 
 import PlanningPeriod from "components/planning-period/PlanningPeriod.js";
+import BreadCrumb from "components/breadcrumb/Breadcrumb.js";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         </header>
         <main className="app-content">
             <h1>Planning Period</h1>
+            <BreadCrumb />
             <PlanningPeriod />
         </main>
     </div>
