@@ -119,7 +119,8 @@ class PlanningPeriod extends React.Component {
                                                 </button>
                                                 <button
                                                     className={`block__button button--transparent ${period === this.state.favorite ? "hidden" : ""}`}
-                                                    onClick={ (e) => this.handleRemovePeriodClick(period, e) }>
+                                                    onClick={ (e) => this.handleRemovePeriodClick(period, e) }
+                                                    title={ `Delete this period (${period.value})` }>
                                                     <svg className="button__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <circle cx="7" cy="7" r="7" fill="#E7E7E7"/>
                                                         <line x1="3" y1="7" x2="11" y2="7" stroke="#CC1A1A" strokeWidth="2"/>
@@ -159,7 +160,8 @@ class PlanningPeriod extends React.Component {
                                 <li className="list-blocks__item">
                                     <button
                                         className="button--transparent block--transparent"
-                                        onClick={ (e) => this.handleAddPeriodClick(e) }>
+                                        onClick={ (e) => this.handleAddPeriodClick(e) }
+                                        title="Add a new period">
                                         <svg className="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="12" cy="12" r="12" fill="#E7E7E7"/>
                                             <line x1="18" y1="12" x2="6" y2="12" stroke="#2EAD73" strokeWidth="2"/>
