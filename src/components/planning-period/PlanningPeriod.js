@@ -15,9 +15,11 @@ class PlanningPeriod extends React.Component {
 
     // Display the new period box
     handleAddPeriodClick() {
-        this.setState(prevState => ({
+        this.setState({
             isNewPeriodFormVisible: true
-        }));
+        }, () => {
+            this.newPeriodInput.focus();
+        });
     };
 
     // Remove the clicked period
@@ -119,14 +121,15 @@ class PlanningPeriod extends React.Component {
                                 <li className="list-blocks__item list-blocks__item--new">
                                         <div className="block">
                                             <div className="block__content">
-                                                <p className="block__title">
+                                                <div className="block__title">
                                                     <input
+                                                        ref={(input) => { this.newPeriodInput = input; }}
                                                         className="block__input field--text--transparent block__title-value"
                                                         type="number"
                                                         placeholder={this.state.defaultPeriodValue}
                                                         onBlur={ (e) => this.handlePeriodInputBlur(e) } />
                                                     day
-                                                </p>
+                                                </div>
                                             </div>
                                         </div>
                                 </li>
