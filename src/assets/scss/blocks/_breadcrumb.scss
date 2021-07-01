@@ -18,6 +18,7 @@
     position: relative;
     min-height: $size-30;
     margin-right: $size-22;
+    margin-bottom: $size-10;
 
     &::before,
     &::after{
@@ -49,7 +50,6 @@
 
 .breadcrumb__item--current {
     background: transparent;
-    margin-top: $size-10;
     font-weight: $font-weight-regular;
 
     &::before,
