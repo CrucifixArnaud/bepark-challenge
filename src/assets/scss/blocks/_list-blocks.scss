@@ -29,12 +29,8 @@
 // Block
 // ---------------------
 .block {
-    position: relative;
-    display: flex;
     align-items: flex-end;
     flex-wrap: wrap;
-    min-width: $size-90;
-    min-height: $size-90;
     border: 1px solid $grey-90;
     border-radius: $size-10;
     background: #fff;
@@ -54,6 +50,19 @@
         border-radius: $size-10;
         z-index: -1;
     }
+}
+
+.block,
+.block--transparent {
+    position: relative;
+    display: flex;
+    min-width: $size-90;
+    min-height: $size-90;
+}
+
+.block--transparent {
+    align-items: center;
+    justify-content: center;
 }
 
 .block--selected::after {
@@ -97,6 +106,17 @@
     font-size: $size-30;
 }
 
+.block__button {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s $ease-in-out, visibility .2s;
+}
+
+.block__button.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 // Block Input
 // "Unstyled" input inside of a bloc
 // e.g. When adding a new period in planning-period
@@ -104,4 +124,8 @@
     width: calc(100% - #{$size-20});
     text-align: center;
     color: $color-body;
+}
+
+.list-blocks__item--new {
+  animation: fadeIn 0.4s forwards;
 }

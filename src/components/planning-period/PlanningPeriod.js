@@ -1,121 +1,77 @@
 import React from 'react';
-import { CSSTransition } from "react-transition-group";
-import { v4 as uuidv4 } from 'uuid';
-
-import { getObjetIndexByKey } from "utils/helpers/array.js";
+import { Flipper, Flipped } from 'react-flip-toolkit';
 
 class PlanningPeriod extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            planningPeriods: [{
-                    "id": `period-${uuidv4()}`,
-                    "value": 1,
-                    "favorite": false
-                }, {
-                    "id": `period-${uuidv4()}`,
-                    "value": 5,
-                    "favorite": false
-                }, {
-                    "id": `period-${uuidv4()}`,
-                    "value": 7,
-                    "favorite": false
-                }, {
-                    "id": `period-${uuidv4()}`,
-                    "value": 15,
-                    "favorite": false
-                }, {
-                    "id": `period-${uuidv4()}`,
-                    "value": 30,
-                    "favorite": true
-                }],
-            defaultPeriodValue: 1
+            favorite: 30,
+            periods: [1, 2, 5, 8, 30],
+            isNewPeriodFormVisible: false,
+            defaultPeriodValue: 0
         };
     };
 
-    // Select a period
-    handleFavoriteClick(value) {
-        let planningPeriods = this.state.planningPeriods.slice();
-
-        const periodIndex = getObjetIndexByKey(planningPeriods, "value", value);
-
-        if (periodIndex > -1) {
-
-            this.resetFavoritePeriods();
-
-            // Toggle the favorite boolean value
-            planningPeriods[periodIndex].favorite = !planningPeriods[periodIndex].favorite;
-
-            this.setState(prevState => ({
-                planningPeriods: planningPeriods
-            }));
-        }
-    }
-
-    // Set all period to non favorite
-    resetFavoritePeriods() {
-        let planningPeriods = this.state.planningPeriods.slice();
-
-        planningPeriods.map((period, index) => {
-            return period.favorite = false;
-        });
-
-        this.setState(prevState => ({
-            planningPeriods: planningPeriods
-        }));
-    }
-
-    // Remove a period
-    handleRemovePeriodClick(value) {
-        let planningPeriods = this.state.planningPeriods.slice();
-
-        const periodIndex = getObjetIndexByKey(planningPeriods, "value", value);
-
-        if (periodIndex > -1) {
-            planningPeriods.splice(periodIndex, 1);
-
-            this.setState(prevState => ({
-                planningPeriods: planningPeriods
-            }));
-        }
-    }
-
-    // Add a period
+    // Display the new period box
     handleAddPeriodClick() {
-        let planningPeriods = this.state.planningPeriods.slice();
+        this.setState(prevState => ({
+            isNewPeriodFormVisible: true
+        }));
+    };
 
-        planningPeriods.push({
-            "id": `period-${uuidv4()}`,
-            "value": null,
-            "favorite": false
+    // Remove the clicked period
+    handleRemovePeriodClick(value) {
+        let periods = this.state.periods;
+
+        const numberIndex = periods.indexOf(value);
+
+        if (numberIndex > -1) {
+            periods.splice(numberIndex, 1);
+
+            this.sortPeriods();
+
+            this.setState(prevState => ({
+                periods: periods,
+            }));
+        }
+    };
+
+    // Set the click period to favorite
+    handleFavoriteClick(value) {
+        this.setState(prevState => ({
+            favorite: value,
+        }));
+    };
+
+    // Save new period input value
+    handlePeriodInputBlur(e) {
+        let periods = this.state.periods;
+        const target = e.target;
+
+        if (target.value) {
+            periods.push(parseInt(target.value));
+        }
+
+        this.setState({
+            isNewPeriodFormVisible: false,
+            periods: periods,
+        }, () => {
+            this.sortPeriods();
+        });
+    }
+
+    // Sort periods in an ascending order
+    sortPeriods() {
+        let periods = this.state.periods;
+
+        periods.sort((a, b) => {
+            return a - b;
         });
 
         this.setState(prevState => ({
-            planningPeriods: planningPeriods
+            periods: periods,
         }));
-    }
-
-    // Save period input value
-    handlePeriodInputBlur(id, e) {
-        const value = (e.target.value) ? e.target.value : this.state.defaultPeriodValue;
-
-        let planningPeriods = this.state.planningPeriods.slice();
-
-        const periodIndex = getObjetIndexByKey(planningPeriods, "id", id);
-
-        if (periodIndex > -1) {
-            planningPeriods[periodIndex].value = value;
-
-            // Sort periods in an ascending order
-            planningPeriods.sort((a, b) => {
-                return a.value - b.value;
-            });
-
-            this.setState(prevState => ({
-                planningPeriods: planningPeriods
-            }));
-        }
     }
 
     render() {
@@ -124,70 +80,73 @@ class PlanningPeriod extends React.Component {
                 <h2 className="sr-only">Select a period:</h2>
                 <p>You can choose here and create the number of day that allows a user to book your parking in advance</p>
                 <div className="box">
-                    <ol className="list-blocks">
-                        {this.state.planningPeriods.map((period, index) => (
-                            <li className="list-blocks__item" key={index}>
-                                <div className={`block ${period.favorite ? "block--selected" : ""}`}>
-                                    <div className="block__header">
-                                        <button
-                                            className={`button--icon ${period.favorite ? "button--selected" : ""}`}
-                                            onClick={ (e) => this.handleFavoriteClick(period.value, e) }
-                                            title={ `Select this period (${period.value})` }>
-                                            <svg className="button__icon" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11 1L13.2451 7.90983H20.5106L14.6327 12.1803L16.8779 19.0902L11 14.8197L5.12215 19.0902L7.36729 12.1803L1.48944 7.90983H8.75486L11 1Z" strokeLinejoin="round"/>
-                                            </svg>
-                                        </button>
-                                        <CSSTransition
-                                            nodeRef={React.createRef()} // Avoid issue with findDOMNode in strict mode and react transition group (That's a quick and probably dirty solution, should be investigated)
-                                            in={!period.favorite}
-                                            timeout={200}
-                                            classNames="fade"
-                                            unmountOnExit>
+                    <Flipper flipKey={this.state.periods.join("") + this.state.isNewPeriodFormVisible} stagger>
+                    <ul className="list-blocks">
+                        {this.state.periods.map(period => (
+                            <Flipped key={period} flipId={period} translate>
+                                <li className="list-blocks__item">
+                                    <div className="block">
+                                        <div className="block__header">
                                             <button
-                                                className="button--transparent"
-                                                onClick={ (e) => this.handleRemovePeriodClick(period.value, e) }>
+                                                className={`button--icon ${this.state.favorite === period ? "button--selected" : ""}`}
+                                                onClick={ (e) => this.handleFavoriteClick(period)}
+                                                title={ `Select this period (${period.value})` }>
+                                                <svg className="button__icon" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11 1L13.2451 7.90983H20.5106L14.6327 12.1803L16.8779 19.0902L11 14.8197L5.12215 19.0902L7.36729 12.1803L1.48944 7.90983H8.75486L11 1Z" strokeLinejoin="round"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className={`block__button button--transparent ${period === this.state.favorite ? "hidden" : ""}`}
+                                                onClick={ (e) => this.handleRemovePeriodClick(period, e) }>
                                                 <svg className="button__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="7" cy="7" r="7" fill="#E7E7E7"/>
                                                     <line x1="3" y1="7" x2="11" y2="7" stroke="#CC1A1A" strokeWidth="2"/>
                                                 </svg>
                                             </button>
-                                        </CSSTransition>
-                                    </div>
-                                    <div className="block__content">
-                                        {period.value &&
+                                        </div>
+                                        <div className="block__content">
                                             <p className="block__title">
-                                                <strong className="block__title-value">{ period.value }</strong>
+                                                <strong className="block__title-value">{ period }</strong>
                                                 day
                                             </p>
-                                        }
-
-                                        {!period.value &&
-                                            <p className="block__title">
-                                                <input
-                                                    className="block__input field--text--transparent block__title-value"
-                                                    type="number"
-                                                    placeholder={this.state.defaultPeriodValue}
-                                                    onBlur={ (e) => this.handlePeriodInputBlur(period.id, e) } />
-                                                day
-                                            </p>
-                                        }
+                                        </div>
                                     </div>
-
-                                </div>
-                            </li>
+                                </li>
+                            </Flipped>
                         ))}
-                        <li className="list-blocks__item">
-                            <button
-                                className="button--transparent"
-                                onClick={ (e) => this.handleAddPeriodClick(e) }>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="12" fill="#E7E7E7"/>
-                                    <line x1="18" y1="12" x2="6" y2="12" stroke="#2EAD73" strokeWidth="2"/>
-                                    <line x1="12" y1="6" x2="12" y2="18" stroke="#2EAD73" strokeWidth="2"/>
-                                </svg>
-                            </button>
-                        </li>
-                    </ol>
+                        {this.state.isNewPeriodFormVisible &&
+                            <Flipped flipId="flip-item-new-period" opacity>
+                                <li className="list-blocks__item list-blocks__item--new">
+                                        <div className="block">
+                                            <div className="block__content">
+                                                <p className="block__title">
+                                                    <input
+                                                        className="block__input field--text--transparent block__title-value"
+                                                        type="number"
+                                                        placeholder={this.state.defaultPeriodValue}
+                                                        onBlur={ (e) => this.handlePeriodInputBlur(e) } />
+                                                    day
+                                                </p>
+                                            </div>
+                                        </div>
+                                </li>
+                            </Flipped>
+                        }
+                        <Flipped flipId="flip-item-add-period" translate>
+                            <li className="list-blocks__item">
+                                <button
+                                    className="button--transparent block--transparent"
+                                    onClick={ (e) => this.handleAddPeriodClick(e) }>
+                                    <svg className="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="12" fill="#E7E7E7"/>
+                                        <line x1="18" y1="12" x2="6" y2="12" stroke="#2EAD73" strokeWidth="2"/>
+                                        <line x1="12" y1="6" x2="12" y2="18" stroke="#2EAD73" strokeWidth="2"/>
+                                    </svg>
+                                </button>
+                            </li>
+                        </Flipped>
+                    </ul>
+                </Flipper>
                 </div>
             </div>
         );
