@@ -50,9 +50,14 @@ class PlanningPeriod extends React.Component {
     handlePeriodInputBlur(e) {
         let periods = this.state.periods;
         const target = e.target;
+        const value = parseInt(target.value);
 
-        if (target.value) {
-            periods.push(parseInt(target.value));
+        if (value) {
+            const newPeriodIndex = periods.indexOf(value);
+
+            if (newPeriodIndex === -1) {
+                periods.push(value);
+            }
         }
 
         this.setState({
