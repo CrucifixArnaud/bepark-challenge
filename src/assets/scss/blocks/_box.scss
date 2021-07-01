@@ -1,0 +1,34 @@
+/*------------------------------------*\
+  > Box
+  Generic box container
+  Unstyled in mobile
+  e.g. Planning Period creation form
+\*------------------------------------*/
+
+.box {
+    @include media-query("medium") {
+        position: relative;
+        padding: $size-35 $size-25;
+        background: #fff;
+        border-radius: $size-10;
+        box-shadow: 0px 0px $size-10 rgba(0, 0, 0, 0.25);
+    }
+}
+
+// Size
+// ---------------------
+.box--medium {
+    max-width: 70.625rem; // 1130
+    min-height: 20.25rem; // 324
+}
+
+// Notifications Box
+// ---------------------
+
+.box .notification-box {
+    @include media-query("medium") {
+        position: absolute;
+        left: $size-25;
+        bottom: $size-28;
+    }
+}

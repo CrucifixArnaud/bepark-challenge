@@ -8,5 +8,7 @@
 
     @include media-query("medium") {
         padding: $size-30;
+        background: $grey-97;
+        width: 100%;
     }
 }
