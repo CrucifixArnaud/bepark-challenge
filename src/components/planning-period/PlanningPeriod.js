@@ -39,6 +39,8 @@ class PlanningPeriod extends React.Component {
         if (numberIndex > -1) {
             periods.splice(numberIndex, 1);
 
+            // AJAX Call to an API should probably come here
+
             this.sortPeriods();
 
             this.setState(prevState => ({
@@ -49,6 +51,8 @@ class PlanningPeriod extends React.Component {
 
     // Set the click period to favorite
     handleFavoriteClick(value) {
+        // AJAX Call to an API should probably come here
+
         this.setState(prevState => ({
             favorite: value,
             notificationText: "Changes were successfully updated",
@@ -82,11 +86,13 @@ class PlanningPeriod extends React.Component {
         const intValue = parseInt(value);
 
         if (intValue && intValue > 0) {
-
             const newPeriodIndex = periods.indexOf(intValue);
 
             if (newPeriodIndex === -1) {
                 periods.push(intValue);
+
+                // AJAX Call to an API should probably come here
+
             } else {
                 this.setState(prevState => ({
                     notificationText: "This period allready exist",
@@ -101,6 +107,7 @@ class PlanningPeriod extends React.Component {
                 isNotificationVisible: true
             }));
         }
+
 
         this.setState({
             isNewPeriodFormVisible: false,
