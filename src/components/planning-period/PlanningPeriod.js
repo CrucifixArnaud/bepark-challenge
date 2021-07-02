@@ -79,9 +79,9 @@ class PlanningPeriod extends React.Component {
     // Save new period input value
     saveNewPeriodValue(value) {
         let periods = this.state.periods;
+        const intValue = parseInt(value);
 
-        if (value && value > 0) {
-            const intValue = parseInt(value);
+        if (intValue && intValue > 0) {
 
             const newPeriodIndex = periods.indexOf(intValue);
 
@@ -105,6 +105,7 @@ class PlanningPeriod extends React.Component {
         this.setState({
             isNewPeriodFormVisible: false,
             periods: periods,
+            favorite: intValue
         }, () => {
             this.sortPeriods();
         });
