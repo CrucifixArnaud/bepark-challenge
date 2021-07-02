@@ -14,6 +14,7 @@ class PlanningPeriod extends React.Component {
             isNewPeriodFormVisible: false,
             defaultPeriodValue: 0,
             notificationText: "",
+            notificationType: "success",
             isNotificationVisible: false
         };
 
@@ -50,8 +51,9 @@ class PlanningPeriod extends React.Component {
     handleFavoriteClick(value) {
         this.setState(prevState => ({
             favorite: value,
-            isNotificationVisible: true,
-            notificationText: "Changes were successfully updated"
+            notificationText: "Changes were successfully updated",
+            notificationType: "success",
+            isNotificationVisible: true
         }));
     };
 
@@ -66,6 +68,12 @@ class PlanningPeriod extends React.Component {
 
             if (newPeriodIndex === -1) {
                 periods.push(value);
+            } else {
+                this.setState(prevState => ({
+                    notificationText: "This period allready exist",
+                    notificationType: "error",
+                    isNotificationVisible: true
+                }));
             }
         }
 
@@ -90,6 +98,7 @@ class PlanningPeriod extends React.Component {
         }));
     }
 
+    // Hide the notifications
     hideNotification() {
         this.setState(prevState => ({
             isNotificationVisible: false
@@ -185,6 +194,7 @@ class PlanningPeriod extends React.Component {
                         <div ref={this.notificationBox} >
                             <NotificationBox
                                 text={this.state.notificationText}
+                                type={this.state.notificationType}
                                 dismiss={() => {this.hideNotification()}}
                                 delay={5000}
                             />

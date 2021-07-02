@@ -10,7 +10,7 @@ class NotificationBox extends React.Component {
 
     render() {
         return (
-            <div className="notification-box">
+            <div role="alert" className={`notification-box ${(this.props.type) ? 'notification-box--' + this.props.type : ''}`}>
                 <p className="notification-box__content">{ this.props.text }</p>
             </div>
         );

@@ -32,12 +32,10 @@ $font-weight-button: $font-weight-regular !default;
 // Colors
 // ---------------------
 
-// Colors
-// ---------------------
-
 // Generics Colors
 // ---------------------
 // Colors name are based on https://chir.ag/projects/name-that-color/
+$red-apple-blossom: #a94442;
 
 $green-jungle: #2ead73;
 
@@ -61,8 +59,8 @@ $grey-90: hsl(0, 0%, 90%);
 $grey-7: hsl(0, 0%, 7%);
 
 // Functional
-$functional-success: chartreuse !default;
-$functional-error: red !default;
+$functional-success: $color-primary !default;
+$functional-error: $red-apple-blossom !default;
 $functional-warning: gold !default;
 
 // Layout
