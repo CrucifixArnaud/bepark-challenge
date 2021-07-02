@@ -80,7 +80,7 @@ class PlanningPeriod extends React.Component {
     saveNewPeriodValue(value) {
         let periods = this.state.periods;
 
-        if (value) {
+        if (value && value > 0) {
             const intValue = parseInt(value);
 
             const newPeriodIndex = periods.indexOf(intValue);
@@ -94,6 +94,12 @@ class PlanningPeriod extends React.Component {
                     isNotificationVisible: true
                 }));
             }
+        } else {
+            this.setState(prevState => ({
+                notificationText: "Period value should be a number (greater than 0)",
+                notificationType: "error",
+                isNotificationVisible: true
+            }));
         }
 
         this.setState({
