@@ -57,17 +57,36 @@ class PlanningPeriod extends React.Component {
         }));
     };
 
-    // Save new period input value
+    // Handle New Period Input Blur
     handlePeriodInputBlur(e) {
-        let periods = this.state.periods;
         const target = e.target;
-        const value = parseInt(target.value);
+        const value = target.value;
+
+        this.saveNewPeriodValue(value);
+    }
+
+    // Handle New Period Input Keyup
+    handlePeriodInputKeyPress(e) {
+        // If key press is 'enter'
+        if (e.charCode === 13) {
+            const target = e.target;
+            const value = target.value;
+
+            this.saveNewPeriodValue(value);
+        }
+    }
+
+    // Save new period input value
+    saveNewPeriodValue(value) {
+        let periods = this.state.periods;
 
         if (value) {
-            const newPeriodIndex = periods.indexOf(value);
+            const intValue = parseInt(value);
+
+            const newPeriodIndex = periods.indexOf(intValue);
 
             if (newPeriodIndex === -1) {
-                periods.push(value);
+                periods.push(intValue);
             } else {
                 this.setState(prevState => ({
                     notificationText: "This period allready exist",
@@ -157,7 +176,8 @@ class PlanningPeriod extends React.Component {
                                                             className="block__input field--text--transparent block__title-value"
                                                             type="number"
                                                             placeholder={this.state.defaultPeriodValue}
-                                                            onBlur={ (e) => this.handlePeriodInputBlur(e) } />
+                                                            onBlur={ (e) => this.handlePeriodInputBlur(e) }
+                                                            onKeyPress={ (e) => this.handlePeriodInputKeyPress(e)} />
                                                         day
                                                     </div>
                                                 </div>
